@@ -34,12 +34,8 @@
     "react-hooks/exhaustive-deps": "warn",
     "react/jsx-filename-extension": [1, {"extensions": [".tsx"]}],
     "import/prefer-default-export": "off",
-    "@typescript-eslint/explicit-function-return-type": [
-      "error",
-      {
-        "allowExpression": true
-      }
-    ],
+    "@typescript-eslint/explicit-function-return-type": "off",
+
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -49,6 +45,14 @@
       }
     ]
   },
+  "overrides": [
+    {
+      "files": [".ts", ".tsx"],
+      "rules": {
+        "@typescript-eslint/explicit-function-return-type": ["error"]
+      }
+    }
+  ],
   "settings": {
     "import/resolver": {
       "typescript": {}

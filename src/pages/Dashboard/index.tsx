@@ -12,7 +12,7 @@ interface Repository {
   owner: {
     login: string;
     avatar_url: string;
-  }
+  };
 }
 
 const Dashboard: React.FC = () => {
@@ -20,26 +20,28 @@ const Dashboard: React.FC = () => {
   const [newRepo, setNewRepo] = useState('');
   const [inputError, setInputError] = useState('');
 
-  async function handleAddRepository(event: FormEvent<HTMLFormElement>): Promise<void> {
+  async function handleAddRepository(
+    event: FormEvent<HTMLFormElement>,
+  ): Promise<void> {
     event.preventDefault();
 
-    if(!newRepo) {
-      setInputError("Type a repository");
+    if (!newRepo) {
+      setInputError('Type a repository');
       return;
     }
 
     try {
       const response = await api.get<Repository>(`repos/${newRepo}`);
 
-    const repository = response.data;
+      const repository = response.data;
 
-    setRepositories([...reposistories, repository]);
-    setNewRepo('');
-    setInputError('');
-    } catch(err) {
+      setRepositories([...reposistories, repository]);
+      setNewRepo('');
+      setInputError('');
+    } catch (err) {
       setInputError('Error while searching for this repository.');
     }
-  };
+  }
 
   return (
     <>
@@ -56,18 +58,18 @@ const Dashboard: React.FC = () => {
       </Form>
       {inputError && <Error>{inputError}</Error>}
       <Reposiories>
-        {reposistories.map(repository => (
+        {reposistories.map((repository) => (
           <a key={repository.full_name} href="/">
-          <img
-            src={repository.owner.avatar_url}
-            alt={repository.owner.login}
-          />
-          <div>
-            <strong>{repository.full_name}</strong>
-            <p>{repository.description}</p>
-          </div>
-          <FiChevronRight size={20} />
-        </a>
+            <img
+              src={repository.owner.avatar_url}
+              alt={repository.owner.login}
+            />
+            <div>
+              <strong>{repository.full_name}</strong>
+              <p>{repository.description}</p>
+            </div>
+            <FiChevronRight size={20} />
+          </a>
         ))}
       </Reposiories>
     </>
