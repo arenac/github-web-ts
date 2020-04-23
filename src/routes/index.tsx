@@ -7,7 +7,9 @@ import Repository from '../pages/Repository';
 const Routes: React.FC = () => (
   <Switch>
     <Route path="/" exact component={Dashboard} />
-    <Route path="/repository" component={Repository} />
+    {/* the plus sign means even if an extra slash comes as rooute params they
+    will be consider all as route params */}
+    <Route path="/repository/:repository+" component={Repository} />
   </Switch>
 );
 
